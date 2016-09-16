@@ -35,7 +35,7 @@ class viewHelper extends View {
     
     public function includeRandomThumbnail($id = '') {
 
-        $photos = glob(PHY_PHOTO_URL . $id . '/thumbs/*.JPG');
+        $photos = glob(PHY_PHOTO_URL . $id . '/thumbs/*.jpg');
         $randNum = rand(0, sizeof($photos) - 1);
         $photoSelected = $photos[$randNum];
 
