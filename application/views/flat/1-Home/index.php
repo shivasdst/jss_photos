@@ -46,7 +46,7 @@
                 <li class="stat-elem">
                     <a href="<?=BASE_URL?>listing/albums">
                         <h2><i class="fa fa-envelope"></i></h2>
-                        <p>Letters</p>
+                        <p>Photos</p>
                     </a>
                 </li>
                 <li class="stat-elem">
