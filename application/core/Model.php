@@ -130,8 +130,8 @@ class Model {
 
 		if(!($match === False)){
 			
-			$data['prev'] = (isset($files[$match-1])) ? preg_replace("/.*\/(.*)\.JPG/", "$1", $files[$match-1]) : '';
-			$data['next'] = (isset($files[$match+1])) ? preg_replace("/.*\/(.*)\.JPG/", "$1", $files[$match+1]) : '';
+			$data['prev'] = (isset($files[$match-1])) ? preg_replace("/.*\/(.*)\.jpg/", "$1", $files[$match-1]) : '';
+			$data['next'] = (isset($files[$match+1])) ? preg_replace("/.*\/(.*)\.jpg/", "$1", $files[$match+1]) : '';
 			return $data;
 		}	
 		else{
@@ -148,7 +148,7 @@ class Model {
 
     public function getRandomImage($id){
 
-        $photos = glob(PHY_PHOTO_URL . $id . '/thumbs/*.JPG');
+        $photos = glob(PHY_PHOTO_URL . $id . '/thumbs/*.jpg');
         $randNum = rand(0, sizeof($photos) - 1);
         $photoSelected = $photos[$randNum];
 
