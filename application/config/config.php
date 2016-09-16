@@ -23,9 +23,9 @@ define('DB_PREFIX', 'jss');
 define('DB_HOST', 'localhost');
 
 // photo will become iitmPHOTO inside
-define('DB_NAME', 'photos');
+define('DB_NAME', 'jssphotos');
 
-define('photos_USER', 'root');
-define('photos_PASSWORD', 'mysql');
+define('jssphotos_USER', 'root');
+define('jssphotos_PASSWORD', 'mysql');
 
 ?>

@@ -6,7 +6,7 @@ define('DEFAULT_ISSUE', '01');
 define('DEFAULT_PAGE', '0001-0010');
 
 define('DEFAULT_ALBUM', '01');
-define('PHOTO_FILE_EXT', '.JPG');
+define('PHOTO_FILE_EXT', '.jpg');
 
 // db table names
 define('METADATA_TABLE_L1', 'album');
