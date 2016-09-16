@@ -3,7 +3,7 @@
         <!-- Column 1 -->
         <div class="col-md-12 text-center">
             <ul class="list-inline sub-nav">
-                <li><a href="<?=BASE_URL?>listing/albums">Letters</a></li>
+                <li><a href="<?=BASE_URL?>listing/albums">Photos</a></li>
                 <li><a>·</a></li>
                 <li><a href="#">Publications</a></li>
                 <li><a>·</a></li>
@@ -35,7 +35,7 @@
             </ul>
             <?php $actualID = $viewHelper->getActualID($data->id); ?>
             <div class="image-full-size">
-                <img class="img-responsive" src="<?=PHOTO_URL . $data->albumID . '/' . $actualID . '.JPG'?>">
+                <img class="img-responsive" src="<?=PHOTO_URL . $data->albumID . '/' . $actualID . '.jpg'?>">
             </div>
         </div>            
         <div class="col-md-3">

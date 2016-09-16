@@ -3,7 +3,7 @@
         <!-- Column 1 -->
         <div class="col-md-12 text-center">
             <ul class="list-inline sub-nav">
-                <li><a href="<?=BASE_URL?>listing/albums">Albums</a></li>
+                <li><a href="<?=BASE_URL?>listing/albums">Photos</a></li>
                 <li><a>·</a></li>
                 <li><a href="<?=BASE_URL?>Publications">Publications</a></li>
                 <li><a>·</a></li>
@@ -28,7 +28,7 @@
         <div class="post">
             <?php $actualID = $viewHelper->getActualID($row->id); ?>
             <a href="<?=BASE_URL?>describe/photo/<?=$row->albumID . '/' . $row->id?>" title="View Details">
-                <img src="<?=PHOTO_URL . $row->albumID . '/thumbs/' . $actualID . '.JPG'?>">
+                <img src="<?=PHOTO_URL . $row->albumID . '/thumbs/' . $actualID . '.jpg'?>">
                 <?php
                     $caption = $viewHelper->getDetailByField($row->description, 'Caption');
                     if ($caption) echo '<p class="image-desc"><strong>' . $caption . '</strong></p>';
