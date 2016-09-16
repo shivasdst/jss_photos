@@ -45,8 +45,8 @@
             <ul class="list-inline">
                 <li class="stat-elem">
                     <a href="<?=BASE_URL?>listing/albums">
-                        <h2><i class="fa fa-envelope"></i></h2>
-                        <p>Photos</p>
+                        <h2><i class="fa fa-image"></i></h2>
+                        <p>Photographs</p>
                     </a>
                 </li>
                 <li class="stat-elem">
@@ -59,12 +59,6 @@
                     <a href="#">
                         <h2><i class="fa fa-volume-up"></i></h2>
                         <p>Multimedia</p>
-                    </a>
-                </li>
-                <li class="stat-elem">
-                    <a href="<?=BASE_URL?>Oral_History">
-                        <h2><i class="fa fa-image"></i></h2>
-                        <p>Photographs</p>
                     </a>
                 </li>
             </ul>
