@@ -59,21 +59,24 @@ class viewHelper extends View {
 
         foreach ($data as $key => $value) {
 
-            if(preg_match('/keyword/i', $key)) {
+        if($value != ""){
+            
+                if(preg_match('/keyword/i', $key)) {
 
-                $html .= '<li class="keywords"><strong>' . $key . ':</strong><span class="image-desc-meta">';
-                
-                $keywords = explode(',', $value);
-                foreach ($keywords as $keyword) {
-   
-                    $html .= '<a href="' . BASE_URL . 'search/field/?description=' . $keyword . '">' . str_replace(' ', '&nbsp;', $keyword) . '</a> ';
+                    $html .= '<li class="keywords"><strong>' . $key . ':</strong><span class="image-desc-meta">';
+                    
+                    $keywords = explode(',', $value);
+                    foreach ($keywords as $keyword) {
+       
+                        $html .= '<a href="' . BASE_URL . 'search/field/?description=' . $keyword . '">' . str_replace(' ', '&nbsp;', $keyword) . '</a> ';
+                    }
+                    
+                    $html .= '</span></li>' . "\n";
                 }
-                
-                $html .= '</span></li>' . "\n";
-            }
-            else{
+                else{
 
-                $html .= '<li><strong>' . $key . ':</strong><span class="image-desc-meta">' . $value . '</span></li>' . "\n";
+                    $html .= '<li><strong>' . $key . ':</strong><span class="image-desc-meta">' . $value . '</span></li>' . "\n";
+                }
             }
         }
 
