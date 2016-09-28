@@ -28,6 +28,7 @@ class data extends Controller {
 		
 		//List albums
 		$albums = $this->model->listFiles(PHY_PHOTO_URL, 'json');
+
 		if($albums) {
 
 			$this->model->insertAlbums($albums, $dbh);
@@ -36,6 +37,7 @@ class data extends Controller {
 			
 				// List photos
 				$photos = $this->model->listFiles(str_replace('.json', '/', $album), 'json');
+
 			
 				if($photos) {
 
@@ -54,6 +56,35 @@ class data extends Controller {
 
 		$dbh = null;
 	}
+
+	public function updateJson() {
+		
+		$data = $this->model->getPostData();
+
+		$fileContents = array();
+		
+		foreach($data as $value){
+
+			$fileContents[$value[0]] = $value[1];
+		}
+
+		$path = PHY_PHOTO_URL . $fileContents['albumID'] . "/" . $fileContents['id'] . ".json";
+
+		$fileContents = json_encode($fileContents,JSON_UNESCAPED_UNICODE);
+
+		if(file_put_contents($path,$fileContents))
+		{
+			echo "Data is written to " . $path . " File. Please call /data/insertDetails once again";
+		}
+		else
+		{
+			echo "Problem in writing data to a file";
+		}
+		
+		$this->insertDetails();
+		// ($data) ? $this->postman($data) : $this->view('error/prompt', array('msg' => FB_FAILURE_MSG));
+	}
+
 }
 
 ?>
