@@ -74,14 +74,15 @@ class data extends Controller {
 
 		if(file_put_contents($path,$fileContents))
 		{
-			echo "Data is written to " . $path . " File. Please call /data/insertDetails once again";
+			echo "Data is written to File<br />";
+			$this->insertDetails();
+			echo "Inserted data to a Database";
 		}
 		else
 		{
 			echo "Problem in writing data to a file";
 		}
 		
-		$this->insertDetails();
 		// ($data) ? $this->postman($data) : $this->view('error/prompt', array('msg' => FB_FAILURE_MSG));
 	}
 
