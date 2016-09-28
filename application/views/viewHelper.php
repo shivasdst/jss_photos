@@ -96,6 +96,35 @@ class viewHelper extends View {
         echo recaptcha_get_html($publickey);
     }
 
+    public function displayDataInForm($json, $auxJson='') {
+
+        $data = json_decode($json, true);
+        
+        if ($auxJson) $data = array_merge($data, json_decode($auxJson, true));
+        
+        $count = 0;
+        $formgroup = 0;
+
+        foreach ($data as $key => $value) {
+            // echo "Key: $key; Value: $value\n";
+            $disable = (($key == 'id') || ($key == 'albumID'))? 'readonly' : '';
+            echo '<div class="form-group" id="frmgroup' . $formgroup . '">' . "\n";
+            echo '<input type="text" class="form-control" name="id'. $count . '[]"  value="' . $key . '"' . $disable  . ' />&nbsp;' . "\n";
+            echo '<input type="text" class="form-control" name="id'. $count . '[]"  value="' . $value . '"' . $disable . ' />' . "\n";
+            if($disable != "readonly"){
+                echo '<input type="button"  onclick="removeUpdateDataElement(\'frmgroup'. $formgroup .'\')" value="Remove" />' . "\n";                
+            }
+            echo '</div>' . "\n";
+            $count++;
+            $formgroup++;
+        }
+
+        echo '<div id="keyvalues">' . "\n";
+        echo '</div>' . "\n";
+        echo '<input type="button" id="keyvaluebtn" onclick="addnewfields(keyvaluebtn)" value="Add New Fields" />' . "\n";
+        echo '<input type="submit" id="submit" value="Update Data" />' . "\n";
+    }
+
 }
 
 ?>
