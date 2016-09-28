@@ -42,6 +42,9 @@
             <div class="image-desc-full">
                 <ul class="list-unstyled">
                     <?=$viewHelper->displayFieldData($data->description)?>
+                    <li>
+                            <a href="<?=BASE_URL?>edit/photo/<?=$data->albumID?>/<?=$viewHelper->getActualID($data->id)?>" class="btn btn-primary" role="button">Contribute</a>
+                    </li>                
                 </ul>
             </div>
         </div>
