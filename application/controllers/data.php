@@ -70,6 +70,8 @@ class data extends Controller {
 
 		$path = PHY_PHOTO_URL . $fileContents['albumID'] . "/" . $fileContents['id'] . ".json";
 
+		$photoUrl = BASE_URL . 'describe/photo/' . $fileContents['albumID'] . "/" . $fileContents['albumID'] . "__" . $fileContents['id'];
+
 		$fileContents = json_encode($fileContents,JSON_UNESCAPED_UNICODE);
 
 		if(file_put_contents($path,$fileContents))
@@ -77,6 +79,7 @@ class data extends Controller {
 			echo "Data is written to File<br />";
 			$this->insertDetails();
 			echo "Inserted data to a Database";
+			echo '<p><a href="'. $photoUrl .'">Click here to see the photo details</a></p>';
 		}
 		else
 		{
