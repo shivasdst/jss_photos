@@ -76,10 +76,10 @@ class data extends Controller {
 
 		if(file_put_contents($path,$fileContents))
 		{
-			echo "Data is written to File<br />";
+			echo "Photo data is updated<br />";
 			$this->insertDetails();
-			echo "Inserted data to a Database";
-			echo '<p><a href="'. $photoUrl .'">Click here to see the photo details</a></p>';
+			echo "Database is updated";
+			echo '<p><a href="'. $photoUrl .'">Click here to see the updated photo details</a></p>';
 		}
 		else
 		{
@@ -87,6 +87,38 @@ class data extends Controller {
 		}
 		
 		// ($data) ? $this->postman($data) : $this->view('error/prompt', array('msg' => FB_FAILURE_MSG));
+	}
+
+	public function updateAlbumJson() {
+		
+		$data = $this->model->getPostData();
+		// var_dump($data);
+		$fileContents = array();
+		
+		foreach($data as $value){
+
+			$fileContents[$value[0]] = $value[1];
+		}
+
+		$path = PHY_PHOTO_URL . $fileContents['albumID'] . ".json";
+
+		$albumUrl = BASE_URL . 'listing/photos/' . $fileContents['albumID'];
+
+		$fileContents = json_encode($fileContents,JSON_UNESCAPED_UNICODE);
+
+
+		if(file_put_contents($path,$fileContents))
+		{
+			echo "Album data is updated.<br />";
+			$this->insertDetails();
+			echo "Database is updated";
+			echo '<p><a href="'. $albumUrl .'">Click here to see the updated album details</a></p>';
+		}
+		else
+		{
+			echo "Problem in writing data to a file";
+		}
+
 	}
 
 }
