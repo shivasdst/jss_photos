@@ -30,6 +30,11 @@
         <div class="post no-border">
             <div class="image-desc-full">
                 <?=$viewHelper->displayFieldData($albumDetails->description)?>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="<?=BASE_URL?>edit/album/<?=$data[0]->albumID?>" class="btn btn-primary" role="button">Contribute</a>
+                    </li>    
+                </ul>    
             </div>
         </div>
 <?php foreach ($data as $row) { ?>
