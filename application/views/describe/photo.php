@@ -42,9 +42,11 @@
             <div class="image-desc-full">
                 <ul class="list-unstyled">
                     <?=$viewHelper->displayFieldData($data->description)?>
+                   <?php if(isset($_SESSION['login'])) {?>
                     <li>
                             <a href="<?=BASE_URL?>edit/photo/<?=$data->albumID?>/<?=$viewHelper->getActualID($data->id)?>" class="btn btn-primary" role="button">Contribute</a>
                     </li>                
+                    <?php } ?>
                 </ul>
             </div>
         </div>
