@@ -18,7 +18,7 @@ define('METADATA_TABLE_L4', 'reset');
 define('SEARCH_OPERAND', 'AND');
 
 // user settings (login and registration)
-define('SALT', 'jss');
+define('SALT', 'iitm');
 define('REQUIRE_EMAIL_VALIDATION', True);//Set these values to True only
 define('REQUIRE_RESET_PASSWORD', True);//if outbound mails can be sent from the server
 
