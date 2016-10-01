@@ -13,15 +13,28 @@ class edit extends Controller {
 	}
 
 	public function photo($albumID, $photoID) {
-		
-		$data = $this->model->editPhoto($albumID, $photoID);
-		($data) ? $this->view('edit/photo', $data) : $this->view('error/index');
+
+		if(isset($_SESSION['login'])){		
+	
+			$data = $this->model->editPhoto($albumID, $photoID);
+			($data) ? $this->view('edit/photo', $data) : $this->view('error/index');
+		}
+		else
+		{
+			$this->redirect('user/login');
+		}
 	}	
 
 	public function album($albumID) {
 
-		$data = $this->model->editAlbum($albumID);
-		($data) ? $this->view('edit/album', $data) : $this->view('error/index');
+		if(isset($_SESSION['login'])){
+			$data = $this->model->editAlbum($albumID);
+			($data) ? $this->view('edit/album', $data) : $this->view('error/index');
+		}
+		else
+		{
+			$this->redirect('user/login');
+		}		
 	}
 
 }
