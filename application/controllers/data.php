@@ -76,10 +76,11 @@ class data extends Controller {
 
 		if(file_put_contents($path,$fileContents))
 		{
-			echo "Photo data is updated<br />";
+			// echo "Photo data is updated<br />";
 			$this->insertDetails();
-			echo "Database is updated";
-			echo '<p><a href="'. $photoUrl .'">Click here to see the updated photo details</a></p>';
+			// echo "Database is updated";
+			// echo '<p><a href="'. $photoUrl .'">Click here to see the updated photo details</a></p>';
+			$this->updateRepo();
 		}
 		else
 		{
@@ -100,7 +101,9 @@ class data extends Controller {
 			$fileContents[$value[0]] = $value[1];
 		}
 
-		$path = PHY_PHOTO_URL . $fileContents['albumID'] . ".json";
+		$albumID = $fileContents['albumID'];
+
+		$path = PHY_PHOTO_URL . $albumID . ".json";
 
 		$albumUrl = BASE_URL . 'listing/photos/' . $fileContents['albumID'];
 
@@ -109,16 +112,55 @@ class data extends Controller {
 
 		if(file_put_contents($path,$fileContents))
 		{
-			echo "Album data is updated.<br />";
+			// echo "Album data is updated.<br />";
 			$this->insertDetails();
-			echo "Database is updated";
-			echo '<p><a href="'. $albumUrl .'">Click here to see the updated album details</a></p>';
+			// echo "Database is updated";
+			// echo '<p><a href="'. $albumUrl .'">Click here to see the updated album details</a></p>';
+			$this->updateRepo();
 		}
 		else
 		{
 			echo "Problem in writing data to a file";
 		}
 
+	}
+
+	private function updateRepo(){
+
+		$statusMsg = array();
+
+		$repo = Git::open(PHY_BASE_URL . '.git');
+
+		// Before all operations, a git pull is done to sync local and remote repos.
+		$repo->run('pull ' . GIT_REMOTE . ' master');
+		array_push($statusMsg, 'Repo synced with remote');
+
+		$files = $this->model->getChangesFromGit($repo);
+		array_push($statusMsg, 'Files to be updated listed');
+
+		$user['email'] = $_SESSION['email'];
+		$user['password'] = $_SESSION['password'];
+		$split = explode('@', $_SESSION['email']);
+		$user['name'] = $split[0];
+
+		if($files['A']){ 
+				$this->model->gitProcess($repo, $files['A'], 'add', GIT_ADD_MSG, $user);
+				array_push($statusMsg, ' Addition of JSON for Albums and Photos are completed');
+		}	
+		if($files['M']){ 
+				$this->model->gitProcess($repo, $files['M'], 'add', GIT_MOD_MSG, $user);
+				array_push($statusMsg, ' Modification of JSON for Albums and Photos are completed');
+		}		
+		if($files['D']){ 
+				$this->model->gitProcess($repo, $files['D'], 'rm', GIT_DEL_MSG, $user);
+				array_push($statusMsg, ' Deleted of JSON for Albums / Photos are completed');
+		}	
+		
+		$repo->run('push ' . GIT_REMOTE . ' master');
+		
+		array_push($statusMsg, 'Local changes pushed to remote');
+
+		$this->view('data/taskCompleted', $statusMsg, '');
 	}
 
 }
