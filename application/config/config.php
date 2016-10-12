@@ -23,11 +23,11 @@ define('DB_PREFIX', 'jss');
 define('DB_HOST', 'localhost');
 
 // Git config
-define('GIT_USER_NAME', 'shivasdst');
-define('GIT_PASSWORD', 'siri2003');
+define('GIT_USER_NAME', 'shivasdst232');
+define('GIT_PASSWORD', 'shiva565');
 define('GIT_REPO', 'github.com/shivasdst/jss_photos.git');
 define('GIT_REMOTE', 'https://' . GIT_USER_NAME . ':' . GIT_PASSWORD . '@' . GIT_REPO);
-define('GIT_EMAIL', 'shivably04sdst@gmail.com');
+define('GIT_EMAIL', 'shiva@srirangadigital.com');
 
 // photo will become iitmPHOTO inside
 define('DB_NAME', 'jssphotos');
