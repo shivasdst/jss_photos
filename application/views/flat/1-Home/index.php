@@ -50,11 +50,17 @@
                     </a>
                 </li>
                 <li class="stat-elem">
-                    <a href="<?=BASE_URL?>../jss_letters">
+                    <a href="<?=LETTERS_URL?>">
                         <h2><i class="fa fa-book"></i></h2>
                         <p>Letters</p>
                     </a>
                 </li>
+                <li class="stat-elem">
+                    <a href="#">
+                        <h2><i class="fa fa-book"></i></h2>
+                        <p>Publications</p>
+                    </a>
+                </li>                
                 <li class="stat-elem">
                     <a href="#">
                         <h2><i class="fa fa-volume-up"></i></h2>
