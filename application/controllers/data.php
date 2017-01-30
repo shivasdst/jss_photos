@@ -57,7 +57,7 @@ class data extends Controller {
 		$dbh = null;
 	}
 
-	public function updateJson() {
+	public function updatePhotoJson($albumID) {
 		
 		$data = $this->model->getPostData();
 
@@ -67,7 +67,7 @@ class data extends Controller {
 
 			$fileContents[$value[0]] = $value[1];
 		}
-
+		$photoID = $fileContents['id'];
 		$path = PHY_PHOTO_URL . $fileContents['albumID'] . "/" . $fileContents['id'] . ".json";
 
 		$photoUrl = BASE_URL . 'describe/photo/' . $fileContents['albumID'] . "/" . $fileContents['albumID'] . "__" . $fileContents['id'];
@@ -76,10 +76,7 @@ class data extends Controller {
 
 		if(file_put_contents($path,$fileContents))
 		{
-			// echo "Photo data is updated<br />";
-			$this->insertDetails();
-			// echo "Database is updated";
-			// echo '<p><a href="'. $photoUrl .'">Click here to see the updated photo details</a></p>';
+			$this->updatePhotoDetails($photoID,$albumID,$fileContents);
 			$this->updateRepo();
 		}
 		else
@@ -89,6 +86,20 @@ class data extends Controller {
 		
 		// ($data) ? $this->postman($data) : $this->view('error/prompt', array('msg' => FB_FAILURE_MSG));
 	}
+	private function updatePhotoDetails($photoID,$albumID,$photoJsonData){
+
+			$dbh = $this->model->db->connect(DB_NAME);
+			$albumDescription = $this->model->getAlbumDetails($albumID);
+			$albumDescription = $albumDescription->description;
+			$photoDescription = $photoJsonData;
+
+			$combinedDescription = json_encode(array_merge(json_decode($photoDescription, true), json_decode($albumDescription, true)));
+
+			$photoID = $albumID . "__" . $photoID;
+
+			$this->model->db->updatePhotoDescription($photoID,$albumID,$combinedDescription,$dbh);
+	}
+
 
 	public function updateAlbumJson() {
 		
@@ -112,10 +123,7 @@ class data extends Controller {
 
 		if(file_put_contents($path,$fileContents))
 		{
-			// echo "Album data is updated.<br />";
-			$this->insertDetails();
-			// echo "Database is updated";
-			// echo '<p><a href="'. $albumUrl .'">Click here to see the updated album details</a></p>';
+			$this->updateAlbumDetails($albumID, $fileContents);
 			$this->updateRepo();
 		}
 		else
@@ -123,6 +131,12 @@ class data extends Controller {
 			echo "Problem in writing data to a file";
 		}
 
+	}
+	private function updateAlbumDetails($albumID, $fileContents){
+		
+		$dbh = $this->model->db->connect(DB_NAME);
+		$this->model->db->updateAlbumDescription($albumID, $fileContents, $dbh);
+		$this->model->updateDetailsForEachPhoto($albumID, $fileContents, $dbh);
 	}
 
 	private function updateRepo(){

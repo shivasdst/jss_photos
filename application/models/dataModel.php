@@ -40,6 +40,25 @@ class dataModel extends Model {
 		}
 	}
 
+	public function updateDetailsForEachPhoto($albumID,$albumDescription,$dbh){
+
+		$photos = $this->listFiles(PHY_PHOTO_URL . $albumID . '/', 'json');
+
+		if($photos){
+
+			foreach ($photos as $photo) {
+
+				$id = preg_replace('/.*\/(.*)\.json/', "$1", $photo);
+				$photoID = $albumID . "__" . $id;
+				$photoDescription = $this->getJsonFromFile($photo);
+				
+				$combinedDescription = json_encode(array_merge(json_decode($photoDescription, true), json_decode($albumDescription, true)));
+
+				$this->db->updatePhotoDescription($photoID,$albumID,$combinedDescription,$dbh);
+			}
+		}
+	}
+
 	public function getJsonFromFile($path) {
 
 		return file_get_contents($path);

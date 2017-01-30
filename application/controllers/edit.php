@@ -14,7 +14,7 @@ class edit extends Controller {
 
 	public function photo($albumID, $photoID) {
 
-		if(isset($_SESSION['login'])){		
+		if(isset($_SESSION['login'])){
 	
 			$data = $this->model->editPhoto($albumID, $photoID);
 			($data) ? $this->view('edit/photo', $data) : $this->view('error/index');
@@ -34,7 +34,7 @@ class edit extends Controller {
 		else
 		{
 			$this->redirect('user/login');
-		}		
+		}
 	}
 
 }

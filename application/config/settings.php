@@ -18,9 +18,9 @@ define('METADATA_TABLE_L4', 'reset');
 define('SEARCH_OPERAND', 'AND');
 
 // user settings (login and registration)
-define('SALT', 'iitm');
-define('REQUIRE_EMAIL_VALIDATION', True);//Set these values to True only
-define('REQUIRE_RESET_PASSWORD', True);//if outbound mails can be sent from the server
+define('SALT', 'jssp');
+define('REQUIRE_EMAIL_VALIDATION', False);//Set these values to True only
+define('REQUIRE_RESET_PASSWORD', False);//if outbound mails can be sent from the server
 
 // mailer settings
 // define('SERVICE_EMAIL', 'webadmin@iitm.ac.in');

@@ -73,17 +73,17 @@ class Model {
 	    return $str;
  	}
 
- 	public function listFiles ($path = '') {
-
- 		if (!(is_dir($path))) return array();
-
- 		$files = scandir($path);
- 
- 		unset($files[array_search('.', $files)]);
- 		unset($files[array_search('..', $files)]);
- 
- 		return $files;
- 	}
+ 	//~ public function listFiles ($path = '') {
+//~ 
+ 		//~ if (!(is_dir($path))) return array();
+//~ 
+ 		//~ $files = scandir($path);
+ //~ 
+ 		//~ unset($files[array_search('.', $files)]);
+ 		//~ unset($files[array_search('..', $files)]);
+ //~ 
+ 		//~ return $files;
+ 	//~ }
 
 	public function getAlbumDetails($albumID) {
 

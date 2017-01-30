@@ -32,7 +32,7 @@
         </div>            
         <div class="col-md-7">
             <div class="image-desc-full">
-                <form  method="POST" class="form-horizontal" role="form" id="updateData" action="<?=BASE_URL?>data/updateJson" onsubmit="return validate()">
+                <form  method="POST" class="form-horizontal" role="form" id="updateData" action="<?=BASE_URL?>data/updatePhotoJson/<?=$data->albumID?>" onsubmit="return validate()">
                     <?=$viewHelper->displayDataInForm(json_encode($data))?>
                 </form>    
             </div>
