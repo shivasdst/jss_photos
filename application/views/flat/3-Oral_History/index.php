@@ -3,9 +3,9 @@
         <!-- Column 1 -->
         <div class="col-md-12 text-center">
             <ul class="list-inline sub-nav">
-                <li><a href="<?=BASE_URL?>listing/albums">Albums</a></li>
+                <li><a href="<?=BASE_URL?>listing/collections">Photo Collection</a></li>
                 <li><a>·</a></li>
-                <li><a href="<?=BASE_URL?>../jss_letters">Letters</a></li>
+                <li><a href="<?=LETTERS_URL?>">Letters</a></li>
                 <li><a>·</a></li>
                 <li><a>Search</a></li>
                 <li id="searchForm">

@@ -44,7 +44,7 @@
             <h1>The Collection</h1>
             <ul class="list-inline">
                 <li class="stat-elem">
-                    <a href="<?=BASE_URL?>listing/albums">
+                    <a href="<?=BASE_URL?>listing/collections">
                         <h2><i class="fa fa-image"></i></h2>
                         <p>Photographs</p>
                     </a>
