@@ -8,6 +8,7 @@ define('PHOTO_URL', PUBLIC_URL . 'Photos/');
 define('DOWNLOAD_URL', PUBLIC_URL . 'Downloads/');
 define('STOCK_IMAGE_URL', PUBLIC_URL . 'images/stock/');
 define('RESOURCES_URL', PUBLIC_URL . 'Resources/');
+define('JSON_PRECAST_URL', BASE_URL . 'json-precast/');
 
 // Physical location of resources
 define('PHY_BASE_URL', '/var/www/html/jss_photos/');
