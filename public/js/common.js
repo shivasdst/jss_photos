@@ -46,7 +46,6 @@ $(document).ready(function() {
         });
     });  
 
-
     // $( '.email-submit' ).on('click', function(event){
 
     //     event.preventDefault();
@@ -73,14 +72,15 @@ jQuery(window).load(function () {
     container.masonry({
         gutter: gutter,
         itemSelector: '.post',
-        columnWidth: '.post'
+        columnWidth: '.post',
+        fitWidth: true
     });
     
     // This code fires every time a user resizes the screen and only affects .post elements
     // whose parent class isn't .container. Triggers resize first so nothing looks weird.
     
     jQuery(window).bind('resize', buildMasonry()).trigger('resize');
-
+    
 });
 
 function buildMasonry(){
@@ -94,7 +94,8 @@ function buildMasonry(){
     container.masonry({
         gutter: gutter,
         itemSelector: '.post',
-        columnWidth: '.post'
+        columnWidth: '.post',
+        fitWidth: true
     });
 
     if (!jQuery('#posts').parent().hasClass('container')) {
@@ -115,10 +116,11 @@ function buildMasonry(){
             posts_width = '100%';
         }
         
+
+        
         // Ensures that all top-level elements have equal width and stay centered
         
         jQuery('#posts, #grid').css('width', '1325px');
-        // jQuery('#posts').css({'margin-left': '-20px'});
-    
+        // jQuery('#posts').css({'margin-left': '-20px'});  
     }
 }
