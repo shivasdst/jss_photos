@@ -65,7 +65,7 @@ $(document).ready(function(){
             if($(".lastpage").length == 0){
                 var pagenum = parseInt($(".pagenum:last").val()) + 1;
                 // alert(base_url+'testing/albums/?page='+pagenum);
-                getresult(base_url+'pinterest/albums/?page='+pagenum);
+                getresult(base_url+'listing/albums/?page='+pagenum);
             }
         }
     });
