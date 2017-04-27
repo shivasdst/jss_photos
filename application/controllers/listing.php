@@ -13,10 +13,31 @@ class listing extends Controller {
 		$this->albums();
 	}
 
-	public function albums() {
 
-		$data = $this->model->listAlbums();
-		($data) ? $this->view('listing/albums', $data) : $this->view('error/index');
+	public function albums() {
+		
+		$data = $this->model->getGetData();
+		
+		unset($data['url']);
+		
+		if(!(isset($data["page"]))){
+		
+			$data["page"] = 1;
+		
+		}
+		
+		$result = $this->model->listAlbums($data);
+		
+		if($data["page"] == 1){
+		
+			($result) ? $this->view('listing/albums', $result) : $this->view('error/index');
+		
+		}
+		else{
+		
+			echo json_encode($result);
+		
+		}
 	}
 
 	public function photos($album = DEFAULT_ALBUM) {
