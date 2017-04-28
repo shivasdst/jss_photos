@@ -78,7 +78,6 @@ class listing extends Controller {
 		}
 	
 		$result = $this->model->listCollections($data);
-		// var_dump($result);
 		if($data["page"] == 1){
 		
 			($result) ? $this->view('listing/collections', $result) : $this->view('error/index');

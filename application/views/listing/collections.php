@@ -30,7 +30,7 @@ $(document).ready(function(){
                     displayString = displayString + '<a href="' + <?php echo '"' . BASE_URL . '"'; ?> + 'describe/collection/'+ obj[i].collectionID + '" title="View Collection">';
                     displayString = displayString + '<div class="fixOverlayDiv">';
                     displayString = displayString + '<img class="img-responsive" src="' + obj[i].Randomimage + '">';
-                    displayString = displayString + '<div class="OverlayText">' + obj[i].Albumcount 
+                    displayString = displayString + '<div class="OverlayText">' + obj[i].Albumcount; 
                     if(obj[i].Albumcount > 1){
                         displayString = displayString + " Albums";
                     }    
@@ -65,7 +65,7 @@ $(document).ready(function(){
             if($(".lastpage").length == 0){
                 var pagenum = parseInt($(".pagenum:last").val()) + 1;
                 // alert(base_url+'testing/albums/?page='+pagenum);
-                getresult(base_url+'pinterest/collections/?page='+pagenum);
+                getresult(base_url+'listing/collections/?page='+pagenum);
             }
         }
     });
