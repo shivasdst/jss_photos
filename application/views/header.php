@@ -21,16 +21,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?=PUBLIC_URL?>js/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="<?=PUBLIC_URL?>js/lightbox.js"></script>
  
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="<?=PUBLIC_URL?>css/normalize.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="css/skeleton.css"> -->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> -->
     <link rel="stylesheet" href="<?=PUBLIC_URL?>css/navbar.css">
     <link rel="stylesheet" href="<?=PUBLIC_URL?>css/carousel.css">
     <link rel="stylesheet" href="<?=PUBLIC_URL?>css/page.css">
