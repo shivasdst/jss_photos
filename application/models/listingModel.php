@@ -99,11 +99,38 @@ class listingModel extends Model {
 	}
 
 
-	public function listCollections() {
+	public function listCollections($pagedata) {
+
+		$perPage = 10;
+
+		$page = $pagedata["page"];
+
+		$start = ($page-1) * $perPage;
+
+		if($start < 0) $start = 0;
+
+		$data = array();
 
 		$collectionsFile = JSON_PRECAST_URL . "collections.json";
 		$jsonData = file_get_contents($collectionsFile);
-		$data = json_decode($jsonData,true);
+		$data = array_slice(json_decode($jsonData,true),$start,$perPage);
+
+		for($i=0;$i<sizeof($data);$i++){
+
+			$data[$i]["Randomimage"] = $this->getRandomImage($data[$i]['albumList'][array_rand($data[$i]['albumList'])]);
+			$data[$i]["Albumcount"] = sizeof($data[$i]['albumList']);
+		}
+
+		
+		if(!empty($data)){
+			
+			$data["hidden"] = '<input type="hidden" class="pagenum" value="' . $page . '" />';
+		}
+		else{
+
+			$data["hidden"] = '<div class="lastpage"></div>';	
+		}
+
 		return $data;
 	}	
 
