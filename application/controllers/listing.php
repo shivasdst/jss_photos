@@ -81,7 +81,7 @@ class listing extends Controller {
 		// var_dump($result);
 		if($data["page"] == 1){
 		
-			($result) ? $this->view('pinterest/collections', $result) : $this->view('error/index');
+			($result) ? $this->view('listing/collections', $result) : $this->view('error/index');
 		
 		}
 		else{
