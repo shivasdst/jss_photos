@@ -41,9 +41,28 @@ class listing extends Controller {
 	}
 
 	public function photos($album = DEFAULT_ALBUM) {
+		
+		$data = $this->model->getGetData();
+		
+		unset($data['url']);
+		
+		if(!(isset($data["page"]))){
+		
+			$data["page"] = 1;
+		
+		}
+	
+		$result = $this->model->listPhotos($album,$data);
 
-		$data = $this->model->listPhotos($album);
-		($data) ? $this->view('listing/photos', $data) : $this->view('error/index');
+		if($data["page"] == 1){
+		
+			($result) ? $this->view('listing/photos', $result) : $this->view('error/index');
+			// var_dump($result);	
+		}
+		else{
+			
+			echo json_encode($result);			
+		}
 	}
 
 	public function collections() {
