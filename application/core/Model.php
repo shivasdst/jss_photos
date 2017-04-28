@@ -176,6 +176,13 @@ class Model {
 
         return '';
     }
+
+    public function getDetailByFieldUsingAlbumID($albumID,$field){
+    	$result = $this->getAlbumDetails($albumID);
+    	$fieldDetails = $this->getDetailByField($result->description,$field);
+    	return $fieldDetails;
+    }
+
 }
 
 ?>
