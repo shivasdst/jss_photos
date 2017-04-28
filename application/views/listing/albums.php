@@ -28,7 +28,7 @@ $(document).ready(function(){
                     // console.log(JSON.parse(obj[i].description).Title);
 
                     displayString = displayString + '<div class="post">';    
-                    displayString = displayString + '<a href="' + <?php echo '"' . BASE_URL . '"'; ?> + 'pinterest/photos/'+ obj[i].albumID + '" title="View Album">';
+                    displayString = displayString + '<a href="' + <?php echo '"' . BASE_URL . '"'; ?> + 'listing/photos/'+ obj[i].albumID + '" title="View Album">';
                     displayString = displayString + '<div class="fixOverlayDiv">';
                     displayString = displayString + '<img class="img-responsive" src="' + obj[i].Randomimage + '">';
                     displayString = displayString + '<div class="OverlayText">' + obj[i].Photocount + '<br /><small>' + obj[i].Event + '</small> <span class="link"><i class="fa fa-link"></i></span></div>';
@@ -64,6 +64,7 @@ $(document).ready(function(){
         if ($(window).scrollTop() == $(document).height() - $(window).height()){
             if($(".lastpage").length == 0){
                 var pagenum = parseInt($(".pagenum:last").val()) + 1;
+                // console.log(pagenum);
                 // alert(base_url+'testing/albums/?page='+pagenum);
                 getresult(base_url+'listing/albums/?page='+pagenum);
             }

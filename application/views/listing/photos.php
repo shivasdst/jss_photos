@@ -1,5 +1,73 @@
 <?php $albumDetails = $data['albumDetails']; unset($data['albumDetails']);?>
+<?php $albumID = $data[0]->albumID;?>
 
+
+<script>
+$(document).ready(function(){
+
+    var albumID = <?php echo  '"' . $albumID . '"';  ?>;
+
+    function getresult(url) {
+        $.ajax({
+            url: url,
+            type: "GET",
+            beforeSend: function(){
+                $('#loader-icon').show();
+            },
+            complete: function(){
+                $('#loader-icon').hide();
+            },
+            success: function(data){
+                // console.log(data);
+                var gutter = parseInt(jQuery('.post').css('marginBottom'));
+                var $grid = $('#posts').masonry({
+                    gutter: gutter,
+                    itemSelector: '.post',
+                    columnWidth: '.post'
+                });
+                var obj = JSON.parse(data);
+                var displayString = "";
+                for(i=0;i<Object.keys(obj).length-2;i++)
+                {                    
+                    displayString = displayString + '<div class="post">';    
+                    displayString = displayString + '<a href="' + <?php echo '"' . BASE_URL . '"'; ?> + 'describe/photo/'+ albumID + '/' + obj[i].id + '" title="View Details">';
+                    displayString = displayString + '<img src="' + <?php echo '"' . PHOTO_URL . '"'; ?> + albumID + '/thumbs/' + obj[i].actualID  + '.jpg" >';
+                    if(obj[i].Caption){
+                        displayString = displayString + '<p class="image-desc">';
+                        displayString = displayString + '<strong>' + obj[i].Caption + '</strong>';    
+                        displayString = displayString + "</p>";
+                    }    
+                    displayString = displayString + '</a>'; 
+                    displayString = displayString + '</div>';
+                }
+
+                var $content = $(displayString); 
+                $content.css('display','none');
+                $grid.append($content).imagesLoaded(
+                    function(){
+                        $content.fadeIn(1000);
+                        $grid.masonry('appended', $content);
+                    }
+                );                                     
+
+               displayString = "";
+               $("#hidden-data").append(obj.hidden);
+            },
+            error: function(){console.log("Fail");}             
+      });
+    }
+    $(window).scroll(function(){
+        if ($(window).scrollTop() == $(document).height() - $(window).height()){
+            if($(".lastpage").length == 0){
+                var pagenum = parseInt($(".pagenum:last").val()) + 1;
+                console.log(pagenum);
+                // alert(base_url+'listing/photos/' + albumID + '/?page='+pagenum);
+                getresult(base_url+'listing/photos/' + albumID + '/?page='+pagenum);
+            }                        
+        }
+    });
+});     
+</script>
 
 <div class="container">
     <div class="row first-row">
@@ -39,11 +107,15 @@
                 <?php } ?>
             </div>
         </div>
+<?php 
+    $hiddenData = $data["hidden"]; 
+    unset($data["hidden"]);
+?>     
 <?php foreach ($data as $row) { ?>
         <div class="post">
             <?php $actualID = $viewHelper->getActualID($row->id); ?>
             <a href="<?=BASE_URL?>describe/photo/<?=$row->albumID . '/' . $row->id?>" title="View Details">
-                <img src="<?=PHOTO_URL . $row->albumID . '/thumbs/' . $actualID . '.jpg'?>">
+                <img src="<?=PHOTO_URL . $row->albumID . '/thumbs/' . $row->actualID . '.jpg'?>">
                 <?php
                     $caption = $viewHelper->getDetailByField($row->description, 'Caption');
                     if ($caption) echo '<p class="image-desc"><strong>' . $caption . '</strong></p>';
@@ -53,3 +125,9 @@
 <?php } ?>
     </div>
 </div>
+<div id="hidden-data">
+    <?php echo $hiddenData; ?>
+</div>
+<div id="loader-icon">
+    <img src="<?=STOCK_IMAGE_URL?>loading.gif" />
+<div>
