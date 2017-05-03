@@ -52,7 +52,6 @@ $(document).ready(function(){
                     function(){
                         $content.fadeIn(1000);
                         $grid.masonry('appended', $content);
-                        // isFetchingPics = false;
                         processing = false;
                     }
                 );                                     
