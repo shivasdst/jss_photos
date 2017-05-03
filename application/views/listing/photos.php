@@ -5,6 +5,7 @@
 <script>
 $(document).ready(function(){
 
+    var processing = false;
     var albumID = <?php echo  '"' . $albumID . '"';  ?>;
 
     function getresult(url) {
@@ -18,6 +19,7 @@ $(document).ready(function(){
                 $('#loader-icon').hide();
             },
             success: function(data){
+                processing = true;
                 // console.log(data);
                 var gutter = parseInt(jQuery('.post').css('marginBottom'));
                 var $grid = $('#posts').masonry({
@@ -47,6 +49,7 @@ $(document).ready(function(){
                     function(){
                         $content.fadeIn(1000);
                         $grid.masonry('appended', $content);
+                        processing = false;
                     }
                 );                                     
 
@@ -62,7 +65,10 @@ $(document).ready(function(){
                 var pagenum = parseInt($(".pagenum:last").val()) + 1;
                 console.log(pagenum);
                 // alert(base_url+'listing/photos/' + albumID + '/?page='+pagenum);
-                getresult(base_url+'listing/photos/' + albumID + '/?page='+pagenum);
+                if(!processing)
+                {
+                    getresult(base_url+'listing/photos/' + albumID + '/?page='+pagenum);
+                }
             }                        
         }
     });
