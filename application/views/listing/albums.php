@@ -1,7 +1,10 @@
 <script>
 $(document).ready(function(){
 
+    var processing = false;
+
     function getresult(url) {
+        processing = true;
         $.ajax({
             url: url,
             type: "GET",
@@ -12,6 +15,7 @@ $(document).ready(function(){
                 $('#loader-icon').hide();
             },
             success: function(data){
+                processing = true;
                 var gutter = parseInt(jQuery('.post').css('marginBottom'));
                 var $grid = $('#posts').masonry({
                     gutter: gutter,
@@ -49,6 +53,7 @@ $(document).ready(function(){
                         $content.fadeIn(1000);
                         $grid.masonry('appended', $content);
                         // isFetchingPics = false;
+                        processing = false;
                     }
                 );                                     
 
@@ -56,17 +61,21 @@ $(document).ready(function(){
 
                 $("#hidden-data").append(obj.hidden);
 
+
             },
             error: function(){console.log("Fail");}             
       });
     }
     $(window).scroll(function(){
-        if ($(window).scrollTop() == $(document).height() - $(window).height()){
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height())* 0.8 ){
             if($(".lastpage").length == 0){
                 var pagenum = parseInt($(".pagenum:last").val()) + 1;
                 // console.log(pagenum);
                 // alert(base_url+'testing/albums/?page='+pagenum);
-                getresult(base_url+'listing/albums/?page='+pagenum);
+                if(!processing)
+                {
+                    getresult(base_url+'listing/albums/?page='+pagenum);
+                }
             }
         }
     });
