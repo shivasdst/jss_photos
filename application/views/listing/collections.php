@@ -1,6 +1,8 @@
 <script>
 $(document).ready(function(){
 
+    var processing = false;
+
     function getresult(url) {
         $.ajax({
             url: url,
@@ -12,6 +14,7 @@ $(document).ready(function(){
                 $('#loader-icon').hide();
             },
             success: function(data){
+                processing = true;
                 // console.log(data);
                 var gutter = parseInt(jQuery('.post').css('marginBottom'));
                 var $grid = $('#posts').masonry({
@@ -50,6 +53,7 @@ $(document).ready(function(){
                     function(){
                         $content.fadeIn(1000);
                         $grid.masonry('appended', $content);
+                        processing = false;
                     }
                 );
 
@@ -65,7 +69,10 @@ $(document).ready(function(){
             if($(".lastpage").length == 0){
                 var pagenum = parseInt($(".pagenum:last").val()) + 1;
                 // alert(base_url+'testing/albums/?page='+pagenum);
-                getresult(base_url+'listing/collections/?page='+pagenum);
+                if(!processing)
+                {
+                    getresult(base_url+'listing/collections/?page='+pagenum);
+                }   
             }
         }
     });
