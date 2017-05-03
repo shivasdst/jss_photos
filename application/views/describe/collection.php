@@ -3,6 +3,8 @@
 <script>
 $(document).ready(function(){
 
+    var processing = false;
+
     var collectionID = <?php echo  '"' . $collectionID . '"';  ?>;
 
     function getresult(url) {
@@ -16,6 +18,7 @@ $(document).ready(function(){
                 $('#loader-icon').hide();
             },
             success: function(data){
+                processing = true;
                 // console.log(data);
                 var gutter = parseInt(jQuery('.post').css('marginBottom'));
                 var $grid = $('#posts').masonry({
@@ -53,7 +56,7 @@ $(document).ready(function(){
                     function(){
                         $content.fadeIn(1000);
                         $grid.masonry('appended', $content);
-                        // isFetchingPics = false;
+                        processing = false;
                     }
                 );                                     
 
@@ -71,7 +74,10 @@ $(document).ready(function(){
                 var pagenum = parseInt($(".pagenum:last").val()) + 1;
                 // console.log(pagenum);
                 // alert(base_url+'describe/collection/'+ collectionID + '?page='+pagenum);
-                getresult(base_url+'describe/collection/'+ collectionID + '?page='+pagenum);
+                if(!processing)
+                {
+                    getresult(base_url+'describe/collection/'+ collectionID + '?page='+pagenum);
+                }
             }
         }
     });
