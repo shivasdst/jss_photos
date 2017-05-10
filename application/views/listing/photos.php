@@ -9,6 +9,7 @@ $(document).ready(function(){
     var albumID = <?php echo  '"' . $albumID . '"';  ?>;
 
     function getresult(url) {
+        processing = true;
         $.ajax({
             url: url,
             type: "GET",
@@ -60,7 +61,7 @@ $(document).ready(function(){
       });
     }
     $(window).scroll(function(){
-        if ($(window).scrollTop() == $(document).height() - $(window).height()){
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.8){
             if($(".lastpage").length == 0){
                 var pagenum = parseInt($(".pagenum:last").val()) + 1;
                 console.log(pagenum);
