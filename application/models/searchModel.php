@@ -49,6 +49,8 @@ class searchModel extends Model {
 		while($result = $sth->fetch(PDO::FETCH_OBJ))
 		{
 			$data[$i] = $result;
+			$data[$i]->actualID = $this->getActualID($result->id);
+			$data[$i]->Caption = $this->getDetailByField($result->description, 'Caption');			
 	        $i++;
 		}
 		$dbh = null;
@@ -88,12 +90,12 @@ class searchModel extends Model {
 		return $data;
 	}
 
-	public function formGeneralQuery($data, $table, $orderBy = '') {
+	public function formGeneralQuery($data, $table, $orderBy = '', $limit = '') {
 
 		$data = $this->regexFilter($data);
 
 		$sqlFilter = (count($data['filter'] > 1)) ? implode(' and ', $data['filter']) : array_values($data['filter']);
-		$sqlStatement = 'SELECT * FROM ' . $table . ' WHERE ' . $sqlFilter . $orderBy;
+		$sqlStatement = 'SELECT * FROM ' . $table . ' WHERE ' . $sqlFilter . $orderBy . $limit;
 
 		$data['query'] = $sqlStatement;
 
