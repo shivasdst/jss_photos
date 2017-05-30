@@ -1,3 +1,53 @@
+<div class="container">
+    <div class="row first-row">
+        <!-- Column 1 -->
+        <div class="col-md-12 text-center">
+            <ul class="list-inline sub-nav">
+                <li><a href="<?=BASE_URL?>listing/collections">Photo Collection</a></li>
+                <li><a>·</a></li>
+                <li><a href="<?=LETTERS_URL?>">Letters</a></li>
+                <li><a>·</a></li>
+                <li><a>Search</a></li>
+                <li id="searchForm">
+                    <form class="navbar-form" role="search" action="<?=BASE_URL?>search/field/" method="get">
+                        <div class="input-group add-on">
+                            <input type="text" class="form-control" placeholder="Keywords" name="description" id="description">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="grid" class="container-fluid">
+    <div id="posts">
+<?php 
+    $hiddenData = $data["hidden"]; 
+    unset($data["hidden"]);
+?>     
+<?php foreach ($data as $row) { ?>
+        <div class="post">
+            <a href="<?=BASE_URL?>describe/collection/<?=$row['collectionID']?>" title="View Collection">
+                <div class="fixOverlayDiv">
+                    <img class="img-responsive" src="<?=$viewHelper->includeRandomThumbnail($row['albumList'][array_rand($row['albumList'])])?>">
+                    <div class="OverlayText"><?=sizeof($row['albumList'])?>
+                    <?php if(($row['albumList']) > 1) echo "Albums"; else echo "Album"; ?><br /><small><?=$row['name']?></small> <span class="link"><i class="fa fa-link"></i></span></div>
+                </div>
+            </a>
+        </div>
+<?php } ?>
+    </div>
+</div>
+
+<div id="hidden-data">
+    <?php echo $hiddenData; ?>
+</div>
+<div id="loader-icon"><img src="<?=STOCK_IMAGE_URL?>loading.gif" /><div>
+
+
 <script>
 $(document).ready(function(){
 
@@ -52,7 +102,7 @@ $(document).ready(function(){
 
                 $grid.append($content).imagesLoaded(
                     function(){
-                        $content.fadeIn(1000);
+                        $content.fadeIn(250);
                         $grid.masonry('appended', $content);
                         processing = false;
                     }
@@ -66,10 +116,9 @@ $(document).ready(function(){
       });
     }
     $(window).scroll(function(){
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height())* 0.8){
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height())* 0.6){
             if($(".lastpage").length == 0){
                 var pagenum = parseInt($(".pagenum:last").val()) + 1;
-                // alert(base_url+'testing/albums/?page='+pagenum);
                 if(!processing)
                 {
                     getresult(base_url+'listing/collections/?page='+pagenum);
@@ -79,54 +128,3 @@ $(document).ready(function(){
     });
 });     
 </script>
-
-<div class="container">
-    <div class="row first-row">
-        <!-- Column 1 -->
-        <div class="col-md-12 text-center">
-            <ul class="list-inline sub-nav">
-                <li><a href="<?=BASE_URL?>listing/collections">Photo Collection</a></li>
-                <li><a>·</a></li>
-                <li><a href="<?=LETTERS_URL?>">Letters</a></li>
-                <li><a>·</a></li>
-                <li><a>Search</a></li>
-                <li id="searchForm">
-                    <form class="navbar-form" role="search" action="<?=BASE_URL?>search/field/" method="get">
-                        <div class="input-group add-on">
-                            <input type="text" class="form-control" placeholder="Keywords" name="description" id="description">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div id="grid" class="container-fluid">
-    <div id="posts">
-<?php 
-    $hiddenData = $data["hidden"]; 
-    unset($data["hidden"]);
-?>     
-<?php foreach ($data as $row) { ?>
-        <div class="post">
-            <a href="<?=BASE_URL?>describe/collection/<?=$row['collectionID']?>" title="View Collection">
-                <div class="fixOverlayDiv">
-                    <img class="img-responsive" src="<?=$viewHelper->includeRandomThumbnail($row['albumList'][array_rand($row['albumList'])])?>">
-                    <div class="OverlayText"><?=sizeof($row['albumList'])?>
-                    <?php if(($row['albumList']) > 1) echo "Albums"; else echo "Album"; ?><br /><small><?=$row['name']?></small> <span class="link"><i class="fa fa-link"></i></span></div>
-                </div>
-            </a>
-        </div>
-<?php } ?>
-    </div>
-</div>
-
-<div id="hidden-data">
-    <?php echo $hiddenData; ?>
-</div>
-<div id="loader-icon"><img src="<?=STOCK_IMAGE_URL?>loading.gif" /><div>
-
-
