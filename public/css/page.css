@@ -695,3 +695,14 @@ button.toggle-button{
   text-align:center;
   display:none;
 }
+/*
+span.img-small img{
+  max-width: 200px;
+  display: inline;
+  margin: 0.4em;
+}
+*/
+#viewletterimages{
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}

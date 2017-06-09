@@ -1,3 +1,5 @@
+
+
 <div class="container">
     <div class="row first-row">
         <!-- Column 1 -->
@@ -34,9 +36,10 @@
                 <?php } ?>
             </ul>
             <?php $actualID = $viewHelper->getActualID($data->id); ?>
-            <div class="image-full-size">
+             <div id="viewletterimages" class="image-full-size">
                 <img class="img-responsive" src="<?=PHOTO_URL . $data->albumID . '/' . $actualID . '.jpg'?>">
             </div>
+            
         </div>            
         <div class="col-md-3">
             <div class="image-desc-full">
@@ -52,3 +55,4 @@
         </div>
     </div>
 </div>
+     <script type="text/javascript" src="<?=PUBLIC_URL?>js/viewer.js"></script>
